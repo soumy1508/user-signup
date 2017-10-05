@@ -13,14 +13,23 @@ def index():
     password_error = request.args.get("passworderror")
     verify_error = request.args.get("verifyerror")
     email_error = request.args.get("emailerror")
-    username_input = request.args.get("usernameinput")
+    username_giveback = request.args.get("usernameinput")
+    email_giveback = request.args.get("emailinput")
     
+    
+    if not username_giveback:
+        username_giveback = ""
+
+    if not email_giveback:
+        email_giveback = ""
+
     return render_template('home.html',
                             usernameerror=username_error and cgi.escape(username_error, quote=True),
                             passworderror=password_error and cgi.escape(password_error, quote=True),
                             verifyerror=verify_error and cgi.escape(verify_error, quote=True),
                             emailerror=email_error and cgi.escape(email_error, quote=True),
-                            usernameinput=username_input and cgi.escape(username_input, quote=True))
+                            usernameinput=username_giveback and cgi.escape(username_giveback, quote=True),
+                            emailinput=email_giveback and cgi.escape(email_giveback, quote=True))
 
 
 @app.route("/welcome", methods=['POST'])
@@ -61,7 +70,7 @@ def welcome():
     if(not usernameerror) and (not passworderror) and (not verifyerror) and (not emailerror):     
         return render_template('welcome.html', username=username_input and cgi.escape(username_input, quote=True))
     else:
-        return redirect("/?usernameerror=" + usernameerror + "&passworderror=" + passworderror + "&verifyerror=" + verifyerror + "&emailerror=" + emailerror + "&usernameinput=" + username_input)
+        return redirect("/?usernameerror=" + usernameerror + "&passworderror=" + passworderror + "&verifyerror=" + verifyerror + "&emailerror=" + emailerror + "&usernameinput=" + username_input + "&emailinput=" + email_input)
 
 
 app.run()

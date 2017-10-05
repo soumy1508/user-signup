@@ -5,7 +5,7 @@
         <tr>
             <td><label for="username">Username</label></td>
             <td>
-                <input name="username" type="text" value =  "" />                 
+                <input name="username" type="text" value = {{ usernameinput }} >                 
                 {% if usernameerror %}
                     <span class='error'>{{ usernameerror }}</span>
                 {% endif %}                               
@@ -32,7 +32,7 @@
         <tr>
             <td><label for="email">Email (optional)</label></td>
             <td>
-                <input name="email" type="text" value="">                
+                <input name="email" type="text" value = {{ emailinput }}>                
                 {% if emailerror %}
                     <span class='error'>{{ emailerror }}</span>
                 {% endif %}
